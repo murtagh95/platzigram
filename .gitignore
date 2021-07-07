@@ -3,5 +3,4 @@
 db.sqlite3
 migrations
 __pycache__
-users/pictures
-posts/photos
+media
