@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+
+    <br><br>
+    <div class="container">
+        <div class="row">
+            {% for post in posts  %}
+                
+                <div class="col-lg-4 offset-lg-4">
+                    <div class="media">
+                        <img class="mr-3 rounded-circle" src="{{ post.user.picture }}" alt="{{ post.user.name }}" >
+                        <div class="media-body">
+                            <h5 class="mt-0"> {{post.user.name}} </h5>
+                            {{ post.timestamp }}
+                        </div>
+                    </div>
+                    <img class="img-fluid mt-3 rounded" src="{{ post.photo }}" alt="{{ post.title }}" >
+                    <h6 class="ml-1 mt-1">{{ post.title }}</h6>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+</body>
+</html>
