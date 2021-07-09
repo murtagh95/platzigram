@@ -51,4 +51,4 @@ def list_posts(request):
     # return HttpResponse('<br>'.join(content))
     
     # Render recibe un objeto request, el template y el contexto
-    return render(request, 'feed.html', {'posts': POSTS})
+    return render(request, 'posts/feed.html', {'posts': POSTS})
