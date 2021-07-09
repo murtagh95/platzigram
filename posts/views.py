@@ -1,7 +1,7 @@
 # Django
 import posts
 from django.shortcuts import render
-# from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # Utilities
 from datetime import datetime
@@ -36,19 +36,9 @@ POSTS = [
     }
 ]
 
-# Create your views here.
+# Con este decorador permitimos acceder a esta vista
+# solo si esta logeado
+@login_required
 def list_posts(request):
     """ Lista de posts existentes """
-    # content = []
-    # for post in POSTS:
-    #     content.append("""
-    #     <p><strong>{name}</strong></p>
-    #     <p><small>{user} - <i> {timestamp} </i> </small></p>
-    #     <figure> <img src="{picture}"/> </figure>
-    #     """.format(
-    #         **post
-    #     ))
-    # return HttpResponse('<br>'.join(content))
-    
-    # Render recibe un objeto request, el template y el contexto
     return render(request, 'posts/feed.html', {'posts': POSTS})
