@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 DJANGO_APPS = (
-	# Aca irian esas que estan desde el inicio del proyecto y vienen por defecto
+	# App que estan desde el inicio del proyecto y vienen por defecto
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,11 +40,11 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-	# Aca irian apps externas como Django Rest Framework, Celery, django debug toolbar, etc
+	# Apps externas como Django Rest Framework, Celery, django debug toolbar, etc
 )
 
 LOCAL_APPS = (
-	# Aca irian las apps de nuestros proyectos que vamoss a instalar, cosas como posts, perfiles, nosé
+	# Apps de nuestros proyectos que vamoss a instalar
     'posts',
     'users'
 )
