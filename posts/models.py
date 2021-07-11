@@ -24,6 +24,6 @@ class Post(models.Model):
     #  Cuando se modifique un campo del registro se guardara la fecha auto
     modified = models.DateTimeField(auto_now=True)
 
-    def __str__(slef):
+    def __str__(self):
         """ Return title and username. """
         return f"{self.title} by @{self.user.username}"

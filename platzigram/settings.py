@@ -41,6 +41,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
 	# Apps externas como Django Rest Framework, Celery, django debug toolbar, etc
+    'django.contrib.humanize',  # mostrar la fecha como: 10 hours ago
 )
 
 LOCAL_APPS = (
