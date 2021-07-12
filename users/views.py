@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from users.models import Profile
 
 # Forms
-from users.forms import ProfileForm
+from users.forms import ProfileForm, SignupForm
 
 # Exception
 from django.db.utils import IntegrityError
@@ -49,31 +49,18 @@ def logout_view(request):
 def signup_view(request):
     """ Sign up view. """
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        password_confirmation = request.POST.get('password_confirmation')
+        form = SignupForm(request.POST)
 
-        if password != password_confirmation:
-            return render(request, 'users/signup.html', {
-                'error': 'Password confirmation does not match.',
-            })
-        try:
-            user = User.objects.create_user(username=username, password=password)
-            user.first_name = request.POST.get('first_name')
-            user.last_name = request.POST.get('last_name')
-            user.email = request.POST.get('email')
-            user.save()
-        except IntegrityError:
-            return render(request, 'users/signup.html', {
-                'error': 'Username is already in user.',
-            })
+        if form.is_valid():
+            form.save()
+            return redirect('login')
         
-        profile = Profile(user=user)
-        profile.save()
+    else:
+        form = SignupForm()
 
-        return redirect('login')
-
-    return render(request, 'users/signup.html')
+    return render(request, 'users/signup.html', {
+            'form': form
+    })
 
 @login_required
 def update_profile(request):
