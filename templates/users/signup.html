@@ -12,7 +12,7 @@
       
     {% endif %}
     
-    <form class="" action='{% url "signup" %}' method="POST">
+    <form class="" action='{% url "users:signup" %}' method="POST">
         {% csrf_token %}
         
         {{ form.as_p }}

@@ -31,7 +31,7 @@ def login_view(request):
         if user:
             login(request, user)
             # Lo rederijimos a posts
-            return redirect('feed')
+            return redirect('posts:feed')
         else:
             return render(request, "users/login.html", {
                 'error': 'Invalid username and password'
@@ -44,7 +44,7 @@ def login_view(request):
 def logout_view(request):
     """ Logout a user. """
     logout(request)
-    return redirect('login')
+    return redirect('users:login')
 
 def signup_view(request):
     """ Sign up view. """
@@ -53,7 +53,7 @@ def signup_view(request):
 
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('users:login')
         
     else:
         form = SignupForm()
