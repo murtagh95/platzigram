@@ -1,0 +1,22 @@
+version: "3"
+services:
+    db:
+        image: postgres:10
+        container_name: database
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
+    web:
+        build: .
+        command: bash -c "python manage.py makemigrations && python manage.py migrate --run-syncdb && python manage.py runserver 0.0.0.0:8000"
+        volumes:
+            - .:/code
+        container_name: app
+        ports:
+            - "8000:8000"
+        depends_on:
+            - db
+            
