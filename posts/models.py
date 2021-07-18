@@ -10,7 +10,7 @@ class Post(models.Model):
     
     title = models.CharField(max_length=255)
 
-    photo =  models.ImageField(
+    photo = models.ImageField(
         upload_to='posts/photos',
         blank=True,
         null=True

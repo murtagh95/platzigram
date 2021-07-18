@@ -25,9 +25,9 @@ class ProfileCompletionMiddleware:
                     # Verifico que no se encuentre en la vista para
                     # actualizar el perfil sino se queda en un bucle infi
                     if request.path not in [
-                        reverse('update_profile'),
-                        reverse('logout')
-                    ] :
+                        reverse('users:update_profile'),
+                        reverse('users:logout')
+                    ]:
                         return redirect("users:update_profile")
         
         response = self.get_response(request)
