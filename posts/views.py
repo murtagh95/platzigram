@@ -1,9 +1,9 @@
+""" Posts views. """
+
 # Django
-import posts
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, CreateView
 
 # Forms
 from posts.forms import PostForm
@@ -12,42 +12,34 @@ from posts.forms import PostForm
 from posts.models import Post
 
 
-# Con este decorador permitimos acceder a esta vista
-# solo si esta logeado
-# @login_required
-# def list_posts(request):
-#     """ Lista de posts existentes """
-#     # Buscamos todos los post y los ordenamos por la fecha de
-#     # creación (al tener el - significa en sentido inverso)
-#     posts = Post.objects.all().order_by('-created')
-#     return render(request, 'posts/feed.html', {'posts': posts})
+class CreatePostView(LoginRequiredMixin, CreateView):
+    """ Create a new post. """
+    template_name = 'posts/new.html'
+    form_class = PostForm
+    success_url = reverse_lazy('posts:feed')
 
-@login_required
-def create_post(request):
-    """ Create new post view. """
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('posts:feed')
-    else:
-        form = PostForm()
-    
-    return render(
-        request=request,
-        template_name='posts/new.html',
-        context={
-            'form': form,
-            'user': request.user,
-            'profile': request.user.profile
-        }
-    )
-        
+    def get_context_data(self, **kwargs):
+        """ Add user and profile to context. """
+        context = super(CreatePostView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['profile'] = self.request.user.profile
+
+        return context
+
+
+class PostDetailView(LoginRequiredMixin, DetailView):
+    """ Return post detail. """
+
+    template_name = 'posts/detail.html'
+    queryset = Post.objects.all()
+    context_object_name = 'post'
+
+
 class PostFeedView(LoginRequiredMixin, ListView):
-     """ Return all published posts. """
+    """ Return all published posts. """
 
-     template_name = 'posts/feed.html'
-     model = Post
-     ordering = ('-created')
-     paginate_by = 2
-     context_object_name = 'posts'
+    template_name = 'posts/feed.html'
+    model = Post
+    ordering = ('-created')
+    paginate_by = 15
+    context_object_name = 'posts'

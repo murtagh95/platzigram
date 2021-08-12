@@ -102,21 +102,3 @@ class SignupForm(forms.Form):
         user = User.objects.create_user(**data)
         profile = Profile(user=user)
         profile.save()
-
-
-class ProfileForm(forms.Form):
-    website = forms.URLField(
-        label='Website',
-        max_length=200
-    )
-    biography = forms.CharField(
-        label='biography',
-        max_length=500,
-        required=False
-    )
-    phone_number = forms.CharField(
-        label='Phone number',
-        max_length=20,
-        required=False
-    )
-    picture = forms.ImageField()

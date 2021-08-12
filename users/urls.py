@@ -11,7 +11,7 @@ from users import views
 urlpatterns = [
     # Management
     path(route='me/profile/',
-         view=views.update_profile,
+         view=views.UpdateProfileView.as_view(),
          name='update_profile'),
     path(route='login',
          view=views.login_view,
@@ -20,10 +20,10 @@ urlpatterns = [
          view=views.logout_view,
          name='logout'),
     path(route='signup',
-         view=views.signup_view,
+         view=views.SignupView.as_view(),
          name='signup'),
     # Posts
     path(route='<str:username>',
          view=views.UserDetailView.as_view(),
-         name='datail'),
+         name='detail'),
 ]

@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -27,10 +26,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 DJANGO_APPS = (
-	# App que estan desde el inicio del proyecto y vienen por defecto
+    # App que estan desde el inicio del proyecto y vienen por defecto
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,18 +38,17 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-	# Apps externas como Django Rest Framework, Celery, django debug toolbar, etc
+    # Apps externas como Django Rest Framework, Celery, django debug toolbar, etc
     'django.contrib.humanize',  # mostrar la fecha como: 10 hours ago
 )
 
 LOCAL_APPS = (
-	# Apps de nuestros proyectos que vamoss a instalar
+    # Apps de nuestros proyectos que vamoss a instalar
     'posts',
     'users'
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,7 +80,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'platzigram.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -125,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -138,7 +133,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
