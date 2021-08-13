@@ -1,8 +1,8 @@
 """ Users views. """
 # Django
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
+from django.contrib.auth import logout, views as auth_view
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, FormView, UpdateView
 from django.urls import reverse, reverse_lazy
@@ -16,37 +16,14 @@ from posts.models import Post
 from users.forms import SignupForm
 
 
-def login_view(request):
+class LoginView(auth_view.LoginView):
     """ Login view. """
-    # import pdb; pdb.set_trace()
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        # Verifico las credenciales de acceso ingresadas
-        # Si son correctas me devuelve el usuario
-        user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
-        if user:
-            login(request, user)
-            # Lo rederijimos a posts
-            return redirect('posts:feed')
-        else:
-            return render(request, "users/login.html", {
-                'error': 'Invalid username and password'
-            })
+    template_name = 'users/login.html'
 
 
-    return render(request, "users/login.html")
-
-
-@login_required
-def logout_view(request):
-    """ Logout a user. """
-    logout(request)
-    return redirect('users:login')
+class LogoutView(LoginRequiredMixin, auth_view.LogoutView):
+    """ Logout view. """
+    template_name = 'users/logged_out.html'
 
 
 class SignupView(FormView):
